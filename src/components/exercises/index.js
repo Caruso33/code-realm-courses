@@ -13,17 +13,18 @@ const styles = {
   }
 };
 
-export default ({ exercises, category, exercise, onSelect }) => (
+export default ({ exercises, category, exercise, onSelect, onDelete }) => (
   <Grid container>
-    <Grid item sm={4}>
+    <Grid item sm={5}>
       <Leftpane
         styles={styles}
         onSelect={onSelect}
+        onDelete={onDelete}
         category={category}
         exercises={exercises}
       />
     </Grid>
-    <Grid item sm={8}>
+    <Grid item sm={7}>
       <Rightpane styles={styles} exercise={exercise} />
     </Grid>
   </Grid>

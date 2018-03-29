@@ -10,16 +10,24 @@ export default class extends Component {
     exercise: {}
   };
   getExercisesByMuscles() {
+    const initExercises = muscles.reduce(
+      (exercises, category) => ({
+        ...exercises,
+        [category]: []
+      }),
+      {}
+    );
+
     return Object.entries(
       this.state.exercises.reduce((exercises, ex) => {
         const { muscles } = ex;
-
-        exercises[muscles] = exercises[muscles]
-          ? [...exercises[muscles], ex]
-          : [ex];
+        exercises[muscles] = [...exercises[muscles], ex];
+        // exercises[muscles] = exercises[muscles]
+        //   ? [...exercises[muscles], ex]
+        //   : [ex];
 
         return exercises;
-      }, {})
+      }, initExercises)
     );
   }
   handleCategorySelect = category => {
@@ -37,6 +45,11 @@ export default class extends Component {
       exercises: [...exercises, exercise]
     }));
   };
+  handleExerciseDelete = id => {
+    this.setState(({ exercises }) => ({
+      exercises: exercises.filter(ex => ex.id !== id)
+    }));
+  };
 
   render() {
     const exercises = this.getExercisesByMuscles();
@@ -50,6 +63,7 @@ export default class extends Component {
         <Exercises
           exercise={exercise}
           onSelect={this.handleExerciseSelect}
+          onDelete={this.handleExerciseDelete}
           category={category}
           exercises={exercises}
         />
