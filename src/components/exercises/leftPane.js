@@ -1,13 +1,20 @@
-import React, { Fragment } from "react";
-import { Paper, Typography, List, IconButton } from "material-ui";
+import React, { Fragment } from 'react';
+import { Paper, Typography, List, IconButton } from 'material-ui';
 import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction
-} from "material-ui/List";
-import { Delete } from "material-ui-icons";
+} from 'material-ui/List';
+import { Delete, Edit } from 'material-ui-icons';
 
-export default ({ styles, exercises, category, onSelect, onDelete }) => (
+export default ({
+  styles,
+  exercises,
+  category,
+  onSelect,
+  onDelete,
+  onSelectEdit
+}) => (
   <Paper style={styles.Paper}>
     {exercises.map(
       ([group, exercises]) =>
@@ -15,7 +22,7 @@ export default ({ styles, exercises, category, onSelect, onDelete }) => (
           <Fragment key={group}>
             <Typography
               variant="headline"
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: 'capitalize' }}
             >
               {group}
             </Typography>
@@ -24,6 +31,9 @@ export default ({ styles, exercises, category, onSelect, onDelete }) => (
                 <ListItem key={title} onClick={() => onSelect(id)} button>
                   <ListItemText primary={title} />
                   <ListItemSecondaryAction>
+                    <IconButton onClick={() => onSelectEdit(id)}>
+                      <Edit />
+                    </IconButton>
                     <IconButton onClick={() => onDelete(id)}>
                       <Delete />
                     </IconButton>

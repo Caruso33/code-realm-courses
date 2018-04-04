@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import { Header, Footer } from "./layouts";
-import Exercises from "./exercises";
-import { muscles, exercises } from "../store";
+import React, { Component, Fragment } from 'react';
+import { Header, Footer } from './layouts';
+import Exercises from './exercises';
+import { muscles, exercises } from '../store';
 
 export default class extends Component {
   state = {
@@ -30,30 +30,40 @@ export default class extends Component {
       }, initExercises)
     );
   }
-  handleCategorySelect = category => {
+  handleCategorySelect = category =>
     this.setState({
       category
     });
-  };
-  handleExerciseSelect = id => {
+
+  handleExerciseSelect = id =>
     this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: false
     }));
-  };
-  handleExerciseCreate = exercise => {
+
+  handleExerciseCreate = exercise =>
     this.setState(({ exercises }) => ({
       exercises: [...exercises, exercise]
     }));
-  };
-  handleExerciseDelete = id => {
+
+  handleExerciseDelete = id =>
     this.setState(({ exercises }) => ({
       exercises: exercises.filter(ex => ex.id !== id)
     }));
-  };
 
+  handleExerciseSelectEdit = id =>
+    this.setState(({ exercises }) => ({
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: true
+    }));
+  handleExerciseEdit = exercise =>
+    this.setState(({ exercises }) => ({
+      exercises: [...exercises.filter(ex => ex.id !== exercise.id), exercise],
+      exercise
+    }));
   render() {
     const exercises = this.getExercisesByMuscles();
-    const { category, exercise } = this.state;
+    const { category, exercise, editMode } = this.state;
     return (
       <Fragment>
         <Header
@@ -62,10 +72,14 @@ export default class extends Component {
         />
         <Exercises
           exercise={exercise}
+          editMode={editMode}
+          muscles={muscles}
           onSelect={this.handleExerciseSelect}
+          onSelectEdit={this.handleExerciseSelectEdit}
           onDelete={this.handleExerciseDelete}
           category={category}
           exercises={exercises}
+          onEdit={this.handleExerciseEdit}
         />
         <Footer
           category={category}
