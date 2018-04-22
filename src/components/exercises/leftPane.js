@@ -8,14 +8,14 @@ import {
 import { Delete, Edit } from '@material-ui/icons';
 
 export default ({
-  styles,
+  classes,
   exercises,
   category,
   onSelect,
   onDelete,
   onSelectEdit
 }) => (
-  <Paper style={styles.Paper}>
+  <Paper className={classes.Paper}>
     {exercises.map(
       ([group, exercises]) =>
         !category || category === group ? (

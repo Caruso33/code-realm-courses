@@ -8,7 +8,7 @@ import { MenuItem } from 'material-ui/Menu';
 
 const styles = theme => ({
   FormControl: {
-    width: '100%'
+    width: 250
   }
 });
 

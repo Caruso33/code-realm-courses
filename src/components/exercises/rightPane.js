@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Paper, Typography } from 'material-ui';
 import Form from './Form';
 export default ({
-  styles,
+  classes,
   editMode,
   onSubmit,
   muscles,
@@ -13,7 +13,7 @@ export default ({
     description = 'Please select an exercise from the list on the left.'
   }
 }) => (
-  <Paper style={styles.Paper}>
+  <Paper className={classes.Paper}>
     {editMode ? (
       <Form muscles={muscles} onSubmit={onSubmit} exercise={exercise} />
     ) : (
