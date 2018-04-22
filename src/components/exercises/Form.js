@@ -28,10 +28,8 @@ export default withStyles(styles)(
           };
     }
 
-    componentWillReceiveProps(nextProps) {
-      this.setState({
-        ...nextProps.exercise
-      });
+    static getDerivedStateFromProps({ exercise }) {
+      return exercise || null;
     }
     handleToggle = () => {
       this.setState({

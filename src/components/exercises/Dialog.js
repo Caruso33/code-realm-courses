@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Dialog } from 'material-ui';
+import { Add } from '@material-ui/icons';
 
-import { Add } from 'material-ui-icons';
 import {
   DialogContent,
   DialogContentText,
